@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Paperscript Circles Random</title>
+    <script type="text/javascript" src="paper-full.js"></script>
+    <link rel="stylesheet" type="text/css" href="circles.css" />
+
+    <script type="text/paperscript" canvas="myCanvas">
+      //empty array
+      var circles = [];
+
+      function onKeyDown(event) {
+        //check the doc on website
+        //check the width and height from the browser
+        var maxPoint = new Point(view.size.width, view.size.height);
+        var randomPoint = Point.random();
+        var point = maxPoint * randomPoint;
+
+        var newCircle = new Path.Circle(point, 10);
+        newCircle.fillColor = "#f64f59";
+        circles.push(newCircle);
+      }
+
+      var animatedCircle = new Path.Circle(new Point(300, 300), 100);
+      animatedCircle.fillColor = "#f64f59";
+
+      function onFrame(event) {
+        for (var i=0; i<circles.length; i++) {
+        //change the color of the circle
+        circles[i].fillColor.hue +=1;
+        //the circle scales down
+        animatedCircle.scale(.9)
+        }
+        animatedCircle.fillColor.hue +=1;
+      }
+    </script>
+  </head>
+
+  <body>
+    <canvas id="myCanvas" resize></canvas>
+  </body>
+</html>
